@@ -50,7 +50,7 @@ export default function App() {
     }
 
     const addGoalHandler = () => {
-        setCourseGoals(currentCourseGoals => [...currentCourseGoals, enteredGoalText]);
+        setCourseGoals(currentCourseGoals => [...currentCourseGoals, {text: enteredGoalText, id: Math.random().toString()}]);
     }
   return (
       <View style={styles.appContainer}>
@@ -60,12 +60,13 @@ export default function App() {
           </View>
           <View style={styles.goalsContainer}>
               <FlatList data={courseGoals} renderItem={(itemData ) => {return (
-                  <View key ={itemData.item} style={styles.goalItem}>
+                  <View key ={itemData.item.text} style={styles.goalItem}>
                       <Text style={styles.goalText}>
-                          {itemData.item}
+                          {itemData.item.text}
                       </Text>
                   </View>);
-              }}/>
+              }}
+              keyExtractor={(item, index) => { return item.id}}/>
           </View>
       </View>
   );
