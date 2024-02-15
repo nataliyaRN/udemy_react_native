@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import {  StyleSheet, View, } from 'react-native';
+import {FlatList, StyleSheet, View,} from 'react-native';
 import GoalInput from "./components/GoalInput";
 import GoalItem from "./components/GoalItem";
 
@@ -13,15 +13,22 @@ export default function App() {
             paddingHorizontal:16,
             flex: 1,
         },
-
+        goalsContainer: {
+            flex: 5,
+        },
     });
 
 
   return (
       <View style={styles.appContainer}>
            <GoalInput courseGoals={courseGoals}  setCourseGoals = {setCourseGoals}></GoalInput>
-          <GoalItem courseGoals={courseGoals}></GoalItem>
-
+           <View style={styles.goalsContainer}>
+              <FlatList data={courseGoals} renderItem={(itemData ) => {
+                  return
+                  (<GoalItem courseGoals={itemData}/>)
+              }}
+               keyExtractor={(item, index) => { return item.id}}/>
+           </View>
       </View>
   );
 

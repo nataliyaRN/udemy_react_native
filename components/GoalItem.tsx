@@ -7,23 +7,15 @@ type Props = {
 
 
 export default function GoalItem({courseGoals}){
-
     return (
-    <View style={styles.goalsContainer}>
-        <FlatList data={courseGoals} renderItem={(itemData ) => {return (
-            <View key ={itemData.item.text} style={styles.goalItem}>
+            <View key ={courseGoals.item.text} style={styles.goalItem}>
                 <Text style={styles.goalText}>
-                    {itemData.item.text}
+                    {courseGoals.item.text}
                 </Text>
-            </View>);
-        }}
-                  keyExtractor={(item, index) => { return item.id}}/>
-    </View>)
+            </View>)
 }
 const styles = StyleSheet.create({
-    goalsContainer: {
-        flex: 5,
-    },
+
     goalItem: {
         borderWidth: 1,
         borderRadius: 5,
