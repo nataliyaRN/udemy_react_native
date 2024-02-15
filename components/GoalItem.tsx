@@ -1,5 +1,5 @@
 import {FlatList, StyleSheet, Text, View} from "react-native";
-import React, {useState} from "react";
+
 
 type Props = {
     courseGoals: any[],
