@@ -1,22 +1,17 @@
 import {Button, StyleSheet, TextInput, View} from "react-native";
-import React, {useState} from "react";
+
 
 type Props = {
-    courseGoals: any[],
-    setCourseGoals: (any[]);
+    onAddGoal: ()=>{};
+    onGoalInput: (enteredText: string )=>{};
 }
-export default function GoalInput({courseGoals, setCourseGoals}){
+export default function GoalInput({ onAddGoal, onGoalInput}){
 
-    const [enteredGoalText, setEnteredGoalText] = useState('');
 
-    const goalInputHandler = (enteredText) => {
-        setEnteredGoalText(enteredText);
-        return null;
-    }
 
-    const addGoalHandler = () => {
-        setCourseGoals(currentCourseGoals => [...currentCourseGoals, {text: enteredGoalText, id: Math.random().toString()}]);
-    }
+
+
+
     const styles = StyleSheet.create({
         inputContainer: {
             flexDirection: 'row',
@@ -37,8 +32,8 @@ export default function GoalInput({courseGoals, setCourseGoals}){
 
 
     return  <View style={styles.inputContainer}>
-        <TextInput placeholder='Your course goal' style={styles.textInput} onChangeText={goalInputHandler}/>
-        <Button title='Add goal' onPress={addGoalHandler}/>
+        <TextInput placeholder='Your course goal' style={styles.textInput} onChangeText={onGoalInput}/>
+        <Button title='Add goal' onPress={onAddGoal}/>
     </View>
 
 }
