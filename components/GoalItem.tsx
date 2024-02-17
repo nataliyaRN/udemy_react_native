@@ -1,18 +1,25 @@
-import {FlatList, StyleSheet, Text, View} from "react-native";
+import {FlatList, Pressable, StyleSheet, Text, View} from "react-native";
 
 
 type Props = {
     courseGoals: any[],
+    onDeleteItem: (item : object)=>{};
+    id: number;
 }
 
 
-export default function GoalItem({courseGoals}){
+
+export default function GoalItem({courseGoals, onDeleteItem, id}){
     return (
-            <View key ={courseGoals.item.text} style={styles.goalItem}>
+        <View key ={courseGoals.item.text} style={styles.goalItem}>
+            <Pressable onPress={onDeleteItem.bind(this, id)}
+                       android_ripple={styles.pressedItem}
+                       style={(pressed) => pressed && styles.pressedItem}>
                 <Text style={styles.goalText}>
                     {courseGoals.item.text}
                 </Text>
-            </View>)
+            </Pressable>
+        </View>)
 }
 const styles = StyleSheet.create({
 
@@ -20,11 +27,15 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 5,
         borderColor: '#4e0fcc',
-        backgroundColor:'#5e0ecc',
+        backgroundColor:'#7448ad',
         margin: 8,
-        padding: 8
     },
     goalText: {
-        color: 'white'
+        color: 'white',
+        padding: 8
+    },
+    pressedItem: {
+        color: '#C2A4E8FF',
+        opacity: 0.5
     }
 });

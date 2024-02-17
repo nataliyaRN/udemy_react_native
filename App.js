@@ -6,14 +6,17 @@ import GoalItem from "./components/GoalItem";
 
 export default function App() {
     const [courseGoals, setCourseGoals] = useState([]);
-    const [enteredGoalText, setEnteredGoalText] = useState('');
-    const addGoalHandler = () => {
+
+    const addGoalHandler = (enteredGoalText) => {
         setCourseGoals(currentCourseGoals => [...currentCourseGoals, {text: enteredGoalText, id: Math.random().toString()}]);
     }
 
-    const goalInputHandler = (enteredText) => {
-        setEnteredGoalText(enteredText);
-        return null;
+    const deleteGoalHandler = (id) => {
+        console.log(id);
+        setCourseGoals(
+            (currentCourseGoals ) => currentCourseGoals.filter(
+                    (goal) =>  goal.id !== id)
+        );
     }
 
     const styles = StyleSheet.create({
@@ -30,10 +33,11 @@ export default function App() {
 
   return (
       <View style={styles.appContainer}>
-           <GoalInput onAddGoal={addGoalHandler} onGoalInput={goalInputHandler}></GoalInput>
+           <GoalInput onAddGoal={addGoalHandler} />
            <View style={styles.goalsContainer}>
               <FlatList data={courseGoals}
-                        renderItem={(itemData ) =>  (<GoalItem courseGoals={itemData}/>)}
+                        renderItem={(itemData ) =>  (
+                            <GoalItem courseGoals={itemData} id={itemData.item.id} onDeleteItem={deleteGoalHandler}/>)}
                         keyExtractor={(item, index) => { return item.id}}/>
            </View>
       </View>
